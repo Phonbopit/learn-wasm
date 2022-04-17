@@ -3,11 +3,27 @@ Learn WASM
 
 Taking some notes while typing it out.
 
+Random learning with:
+
+- [Book] - WebAssembly - The Definitive Guide
+- https://wasmbyexample.dev
+- https://webassembly.org/getting-started/developers-guide/
+- https://developer.mozilla.org/en-US/docs/WebAssembly
+- https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md
+
+## Things I want to learn
+
 - https://github.com/WebAssembly/wabt
 - https://github.com/wasm3/wasm3
 - https://wasmtime.dev
 - https://webassembly.github.io/spec/core/appendix/index-instructions.html
 - https://webassembly.github.io/wabt/demo/wat2wasm/
+- https://github.com/WebAssembly/binaryen
+- https://github.com/wasmerio/wasmer
+- https://github.com/yewstack/yew
+- https://github.com/rustwasm/wasm-pack
+- https://rustwasm.github.io/docs/book/
+- https://github.com/mbasso/awesome-wasm
 
 Install via brew
 
@@ -43,3 +59,12 @@ wasm3 --repl simple.wasm
 wasm3> addTwo 2 3
 Result: 5
 ```
+
+- Web Assembly on browser : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/Instance
+
+```
+python3 -m http.server
+```
+
+
+### Module Structure
