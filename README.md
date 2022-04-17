@@ -11,7 +11,7 @@ Random learning with:
 - https://developer.mozilla.org/en-US/docs/WebAssembly
 - https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md
 
-## Things I want to learn
+## Things I want to explore
 
 - https://github.com/WebAssembly/wabt
 - https://github.com/wasm3/wasm3
@@ -25,11 +25,11 @@ Random learning with:
 - https://rustwasm.github.io/docs/book/
 - https://github.com/mbasso/awesome-wasm
 
-#### VS Code
+## VS Code
 
-- - WebAssembly Toolkit for VSCode - https://marketplace.visualstudio.com/items?itemName=dtsvet.vscode-wasm
+- WebAssembly Toolkit for VSCode - https://marketplace.visualstudio.com/items?itemName=dtsvet.vscode-wasm
 
-#### Install via brew
+## Install via brew
 
 ```
 brew install wabt
@@ -69,7 +69,7 @@ Result: 5
 python3 -m http.server
 ```
 
-#### Module Structure
+## Module Structure
 
 Empty WASM module.
 
