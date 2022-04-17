@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WASM on Web</title>
+</head>
+<body>
+  <h1>Hello WASM!</h1>
+
+  <p>Sum of 10 + 20 =</p><span id="sum"></span>
+  <script src="index.js"></script>
+  <script>
+    fetchWASMFile('simple.wasm').then(instance => {
+      console.log('fetch instance', instance);
+
+      let sum = instance.exports.addTwo(10, 20);
+      let sumEl = document.getElementById('sum');
+      sumEl.innerText = sum;
+    })
+  </script>
+</body>
+</html>
