@@ -1,7 +1,7 @@
 Learn WASM
 ---
 
-Taking some notes while typing it out.
+Taking some notes while typing it out. (No structure, no format)
 
 Random learning with:
 
@@ -25,7 +25,11 @@ Random learning with:
 - https://rustwasm.github.io/docs/book/
 - https://github.com/mbasso/awesome-wasm
 
-Install via brew
+#### VS Code
+
+- - WebAssembly Toolkit for VSCode - https://marketplace.visualstudio.com/items?itemName=dtsvet.vscode-wasm
+
+#### Install via brew
 
 ```
 brew install wabt
@@ -33,8 +37,7 @@ brew install wasm3
 brew install wasmtime
 ```
 
-> Note: Can't install via command line on Mac M1 for wasmtime : reference : https://github.com/bytecodealliance/wasmtime/pull/3983
-
+> Note: I can't install via command line on Mac M1 for wasmtime : reference : https://github.com/bytecodealliance/wasmtime/pull/3983
 
 - WAT is WebAssembly Text Format
 - wabt - pronounced "wabbit"
@@ -66,5 +69,34 @@ Result: 5
 python3 -m http.server
 ```
 
+#### Module Structure
 
-### Module Structure
+Empty WASM module.
+
+```wat
+(module)
+```
+
+```
+wat2wasm empty.wat
+
+-rw-r--r--  1 chai  staff  8 Apr 17 19:04 empty.wasm
+```
+
+```
+wasm-objdump -x empty.wasm
+```
+
+#### recommneded way to instantiate modules
+
+```js
+(async () => {
+  const fetchPromise = fetch(url);
+  const { instance } = await WebAssembly.instantiateStreaming(fetchPromise);
+
+  console.log('instance', instance);
+})();
+```
+
+- Promise instead of `ArrayBuffer` -> `bytes`
+- Proposal ES Module - https://github.com/WebAssembly/esm-integration

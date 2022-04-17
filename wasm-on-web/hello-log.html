@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WASM Import test.</title>
+  </head>
+  <body>
+    <script>
+      WebAssembly.compileStreaming(fetch("hellolog.wasm")).then((mod) => {
+        console.log('mod', mod);
+
+        let imports = WebAssembly.Module.imports(mod);
+        console.log('imports', imports[0]);
+
+        let exports = WebAssembly.Module.exports(mod);
+        console.log('exports', exports);
+      });
+      const loadWasmFile = (url, importObject) => {
+        return fetch(url)
+          .then((response) => response.arrayBuffer())
+          .then((bytes) => WebAssembly.instantiate(bytes, importObject))
+          .then((results) => results.instance);
+      };
+
+      let importObject = {
+        imports: {
+          log_func: (arg) => console.log(`Your are this old: ${arg} year`),
+        },
+      };
+
+      loadWasmFile("hellolog.wasm", importObject).then((instance) =>
+        console.log(instance.exports.log_how_old(2022, 2000))
+      );
+    </script>
+  </body>
+</html>
