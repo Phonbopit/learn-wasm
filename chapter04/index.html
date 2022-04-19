@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memory</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Memory</h1>
+      <div>Your memory instance is <span id="memory"></span> bytes.</div>
+      <div>total pages: <span id="pages"></span></div>
+      <div>Uint32Buffer[0] = <span id="firstint"></span></div>
+      <div>Uint8Buffer[0-4] = <span id="firstbytes"></span></div>
+
+      <button id="expand">Expand</button>
+
+      <script>
+        const getId = (id) => document.getElementById(id);
+
+        function showDetails(mem) {
+          let buf = mem.buffer;
+          let memEl = getId("memory");
+          let pagesEl = getId("pages");
+          let firstIntEl = getId("firstint");
+          let firstBytesEl = getId("firstbytes");
+
+          console.log("buf", buf);
+
+          memEl.innerText = buf.byteLength;
+          pagesEl.innerText = buf.byteLength / 65536;
+
+          let i32 = new Uint32Array(buf);
+          let u8 = new Uint8Array(buf);
+
+          firstIntEl.innerText = i32[0];
+          firstBytesEl.innerText = `[${u8[0]}, ${u8[1]}, ${u8[2]}, ${u8[3]}]`;
+        }
+
+        function fetchWASMFile(url, importObject) {
+          return fetch(url)
+            .then((response) => response.arrayBuffer())
+            .then((bytes) => WebAssembly.instantiate(bytes, importObject))
+            .then((results) => results.instance);
+        }
+
+        fetchWASMFile("memory.wasm").then((instance) => {
+          let mem = instance.exports.memory;
+          let button = getId("expand");
+
+          button.onclick = () => {
+            try {
+              mem.grow(1);
+              showDetails(mem);
+            } catch (err) {
+              console.error(err);
+            }
+          };
+        });
+      </script>
+    </div>
+  </body>
+</html>
